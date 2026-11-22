@@ -36,3 +36,21 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+def plot_results(df, path="bess_arbitrage_simulation_results.png"):
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    fig, ax = plt.subplots(3, 1, figsize=(12, 8), sharex=True)
+    ax[0].plot(df["timestamp"], df["spot_price_eur_mwh"])
+    ax[0].set_ylabel("Price (EUR/MWh), synthetic")
+    ax[1].bar(df["timestamp"], df["discharge_mw"], width=0.04, label="Discharge")
+    ax[1].bar(df["timestamp"], -df["charge_mw"], width=0.04, label="Charge")
+    ax[1].set_ylabel("Power (MW)")
+    ax[1].legend()
+    ax[2].plot(df["timestamp"], df["soc_percent"])
+    ax[2].set_ylabel("SoC (%)")
+    fig.tight_layout()
+    fig.savefig(path, dpi=120)
