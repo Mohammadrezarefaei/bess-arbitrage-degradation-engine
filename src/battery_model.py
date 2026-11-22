@@ -15,5 +15,6 @@ def compute_marginal_degradation_cost(
   total_deliverable_energy_mwh = (
       cycle_life_80_dod * battery_capacity_mwh * nominal_dod
   )
-  depreciable_capex = capex_per_mwh_eur * target_soh_loss_pct
+  total_capex_eur = capex_per_mwh_eur * battery_capacity_mwh
+  depreciable_capex = total_capex_eur * target_soh_loss_pct
   return float(depreciable_capex / total_deliverable_energy_mwh)
