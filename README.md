@@ -69,3 +69,15 @@ bess-arbitrage-degradation-engine/
 ├── requirements.txt
 ├── README.md
 └── .gitignore
+
+## Scope and limitations
+
+- Prices in the simulation are **synthetic** (seed 42), not EPEX/SMARD data.
+- Degradation is a constant throughput cost (9.0 EUR/MWh with the default
+  parameters: 20% of total CAPEX over 5,000 cycles at 80% DoD). It is not an
+  SoH or depth-of-discharge model.
+- The cost is applied to both charged and discharged energy.
+- Results assume perfect price foresight, so they are an upper bound, not
+  achievable revenue.
+- The dispatch problem is a MILP with a binary charge/discharge mode and
+  terminal SoC equal to initial SoC.
